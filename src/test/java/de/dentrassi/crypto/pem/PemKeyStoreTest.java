@@ -10,9 +10,13 @@
  *******************************************************************************/
 package de.dentrassi.crypto.pem;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.Security;
 
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -20,17 +24,47 @@ public class PemKeyStoreTest {
 
 	@BeforeAll
 	public static void setup() {
+	}
+
+	protected void testWithProvider(final ThrowingCallable callable) throws Throwable {
+		assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
+
 		Security.addProvider(new PemKeyStoreProvider());
+
+		try {
+			callable.call();
+		} finally {
+			Security.removeProvider("PEM");
+		}
+
+		assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
 	}
 
 	@Test
-	public void testGetInstance1() throws Exception {
-		KeyStore.getInstance("PEM", "PEM");
+	public void testGetInstance1() throws Throwable {
+
+		testWithProvider(() -> {
+			KeyStore.getInstance("PEM");
+		});
+
 	}
 
 	@Test
-	public void testGetInstance2() throws Exception {
-		KeyStore.getInstance("PEM");
+	public void testGetInstance2() throws Throwable {
+
+		testWithProvider(() -> {
+			KeyStore.getInstance("PEM", "PEM");
+		});
+
+	}
+
+	@Test
+	public void testGetInstance3() throws Throwable {
+
+		testWithProvider(() -> {
+			KeyStore.getInstance("PEM", new PemKeyStoreProvider());
+		});
+
 	}
 
 }
