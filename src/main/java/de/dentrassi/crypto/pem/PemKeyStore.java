@@ -41,17 +41,18 @@ public class PemKeyStore extends KeyStoreSpi {
 	private Map<String, Object> objects = Collections.emptyMap();
 
 	@Override
-	public Key engineGetKey(String alias, char[] password) throws NoSuchAlgorithmException, UnrecoverableKeyException {
+	public Key engineGetKey(final String alias, final char[] password)
+			throws NoSuchAlgorithmException, UnrecoverableKeyException {
 		return null;
 	}
 
 	@Override
-	public Certificate[] engineGetCertificateChain(String alias) {
+	public Certificate[] engineGetCertificateChain(final String alias) {
 		return null;
 	}
 
 	@Override
-	public Certificate engineGetCertificate(String alias) {
+	public Certificate engineGetCertificate(final String alias) {
 		final Object obj = this.objects.get(alias);
 
 		if (obj instanceof Certificate) {
@@ -62,7 +63,7 @@ public class PemKeyStore extends KeyStoreSpi {
 	}
 
 	@Override
-	public Date engineGetCreationDate(String alias) {
+	public Date engineGetCreationDate(final String alias) {
 		final Object obj = this.objects.get(alias);
 
 		if (obj instanceof X509Certificate) {
@@ -74,29 +75,30 @@ public class PemKeyStore extends KeyStoreSpi {
 	}
 
 	@Override
-	public void engineSetKeyEntry(String alias, Key key, char[] password, Certificate[] chain)
+	public void engineSetKeyEntry(final String alias, final Key key, final char[] password, final Certificate[] chain)
 			throws KeyStoreException {
 		throw new KeyStoreException("Unsupported operation");
 	}
 
 	@Override
-	public void engineSetKeyEntry(String alias, byte[] key, Certificate[] chain) throws KeyStoreException {
+	public void engineSetKeyEntry(final String alias, final byte[] key, final Certificate[] chain)
+			throws KeyStoreException {
 		throw new KeyStoreException("Unsupported operation");
 	}
 
 	@Override
-	public void engineSetCertificateEntry(String alias, Certificate cert) throws KeyStoreException {
+	public void engineSetCertificateEntry(final String alias, final Certificate cert) throws KeyStoreException {
 		throw new KeyStoreException("Unsupported operation");
 	}
 
 	@Override
-	public void engineDeleteEntry(String alias) throws KeyStoreException {
+	public void engineDeleteEntry(final String alias) throws KeyStoreException {
 		throw new KeyStoreException("Unsupported operation");
 	}
 
 	@Override
 	public Enumeration<String> engineAliases() {
-		final Iterator<String> keys = objects.keySet().iterator();
+		final Iterator<String> keys = this.objects.keySet().iterator();
 
 		return new Enumeration<String>() {
 
@@ -113,7 +115,7 @@ public class PemKeyStore extends KeyStoreSpi {
 	}
 
 	@Override
-	public boolean engineContainsAlias(String alias) {
+	public boolean engineContainsAlias(final String alias) {
 		return this.objects.containsKey(alias);
 	}
 
@@ -123,7 +125,7 @@ public class PemKeyStore extends KeyStoreSpi {
 	}
 
 	@Override
-	public boolean engineIsKeyEntry(String alias) {
+	public boolean engineIsKeyEntry(final String alias) {
 		return false;
 	}
 
@@ -138,7 +140,7 @@ public class PemKeyStore extends KeyStoreSpi {
 			return null;
 		}
 
-		for (final Map.Entry<String, Object> entry : objects.entrySet()) {
+		for (final Map.Entry<String, Object> entry : this.objects.entrySet()) {
 			if (entry.getValue() == cert) {
 				return entry.getKey();
 			}
@@ -148,14 +150,14 @@ public class PemKeyStore extends KeyStoreSpi {
 	}
 
 	@Override
-	public void engineStore(OutputStream stream, char[] password)
+	public void engineStore(final OutputStream stream, final char[] password)
 			throws IOException, NoSuchAlgorithmException, CertificateException {
 
 		throw new IOException("Unsupported operation");
 	}
 
 	@Override
-	public void engineLoad(InputStream stream, char[] password)
+	public void engineLoad(final InputStream stream, final char[] password)
 			throws IOException, NoSuchAlgorithmException, CertificateException {
 
 		if (stream == null) {
