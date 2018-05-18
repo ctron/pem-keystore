@@ -11,7 +11,7 @@
 	<name>PEM Key Store Provider</name>
 	<description>Provides a PEM based KeyStore</description>
 
-	<url>https://ctron.github.io/pem-keystore</url>
+	<url>https://github.com/ctron/pem-keystore</url>
 
 	<inceptionYear>2018</inceptionYear>
 
