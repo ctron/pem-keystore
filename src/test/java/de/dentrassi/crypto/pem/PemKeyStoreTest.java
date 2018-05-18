@@ -13,14 +13,24 @@ package de.dentrassi.crypto.pem;
 import java.security.KeyStore;
 import java.security.Security;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class PemKeyStoreTest {
 
-	@Test
-	public void testGetInstance () throws Exception {
+	@BeforeAll
+	public static void setup() {
 		Security.addProvider(new PemKeyStoreProvider());
-		KeyStore.getInstance("PEM","PEM");
 	}
-	
+
+	@Test
+	public void testGetInstance1() throws Exception {
+		KeyStore.getInstance("PEM", "PEM");
+	}
+
+	@Test
+	public void testGetInstance2() throws Exception {
+		KeyStore.getInstance("PEM");
+	}
+
 }
