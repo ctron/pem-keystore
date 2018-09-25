@@ -8,6 +8,7 @@
  * Contributors:
  *     Jens Reimann - initial API and implementation
  *******************************************************************************/
+
 package de.dentrassi.crypto.pem;
 
 import java.security.AccessController;
@@ -16,24 +17,27 @@ import java.security.Provider;
 
 public class PemKeyStoreProvider extends Provider {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public PemKeyStoreProvider() {
-		super("PEM", 1, "Provides PEM based KeyStores");
-		setup();
-	}
+    public PemKeyStoreProvider() {
+        super("PEM", 1, "Provides PEM based KeyStores");
+        setup();
+    }
 
-	private void setup() {
-		AccessController.doPrivileged(new PrivilegedAction<Void>() {
-			@Override
-			public Void run() {
-				performSetup();
-				return null;
-			}
-		});
-	}
+    private void setup() {
+        AccessController.doPrivileged(new PrivilegedAction<Void>() {
 
-	private void performSetup() {
-		put("KeyStore.PEM", "de.dentrassi.crypto.pem.PemKeyStore");
-	}
+            @Override
+            public Void run() {
+                performSetup();
+                return null;
+            }
+        });
+    }
+
+    private void performSetup() {
+        put("KeyStore.PEM", "de.dentrassi.crypto.pem.PemKeyStore");
+        put("KeyStore.PEMCFG", "de.dentrassi.crypto.pem.PemConfigKeyStore");
+        put("KeyStore.PEMCA", "de.dentrassi.crypto.pem.PemBundleKeyStore");
+    }
 }

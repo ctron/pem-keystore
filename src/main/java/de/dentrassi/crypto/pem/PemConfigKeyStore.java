@@ -16,11 +16,11 @@ import java.io.InputStream;
 import java.security.cert.CertificateException;
 import java.util.Map;
 
-public class PemKeyStore extends AbstractPemKeyStore {
+public class PemConfigKeyStore extends AbstractPemKeyStore {
 
     @Override
     protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
-        return PemUtils.loadFrom(stream, false);
+        return PemUtils.loadFromConfiguration(stream);
     }
 
 }
