@@ -18,9 +18,9 @@ import java.util.Map;
 
 public class PemConfigKeyStore extends AbstractPemKeyStore {
 
-    @Override
-    protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
-        return PemUtils.loadFromConfiguration(stream);
-    }
+	@Override
+	protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
+		return PemUtils.loadFromConfiguration(stream);
+	}
 
 }
