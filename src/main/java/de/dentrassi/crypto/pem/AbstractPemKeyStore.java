@@ -198,15 +198,9 @@ public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
 	@Override
 	public void engineLoad(final InputStream stream, final char[] password) throws IOException, NoSuchAlgorithmException, CertificateException {
 
-		// if (stream != null) {
-		// this.entries = load(stream);
-		// }
-
-		if (stream == null) {
-			throw new IOException("KeyStore requires input stream");
+		if (stream != null) {
+			this.entries = load(stream);
 		}
-
-		this.entries = load(stream);
 
 	}
 
