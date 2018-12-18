@@ -88,3 +88,4 @@ local.properties
 .nfs*
 
 # End of https://www.gitignore.io/api/linux,eclipse
+/target/
