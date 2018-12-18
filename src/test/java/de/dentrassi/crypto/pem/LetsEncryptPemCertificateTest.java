@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class LetsEncryptPemCertificateTest {
 
 	@Test
-	public void testTls() throws Exception {
+	public void testLetsEncryptPemCertificateTest() throws Exception {
 
 		final KeyStore ks = KeyStore.getInstance("PEMCFG", new PemKeyStoreProvider());
 		try (FileInputStream stream = new FileInputStream("src/test/resources/pem_tls.properties")) {
