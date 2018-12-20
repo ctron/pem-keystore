@@ -20,6 +20,7 @@ import java.security.KeyStore;
 import java.security.Security;
 import java.security.cert.Certificate;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,6 +29,11 @@ public class PemConfigKeyStoreTest {
     @BeforeAll
     public static void setup() {
         Security.addProvider(new PemKeyStoreProvider());
+    }
+
+    @AfterAll
+    public static void cleanup() {
+        Security.removeProvider("PEM");
     }
 
     @Test
