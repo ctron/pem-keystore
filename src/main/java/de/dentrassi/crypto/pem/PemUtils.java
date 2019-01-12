@@ -74,7 +74,8 @@ public class PemUtils {
 
     }
 
-    private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained, final InputStream stream) throws CertificateException, IOException {
+    private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained, 
+    	    final InputStream stream) throws CertificateException, IOException {
 
         final CertificateFactory factory = CertificateFactory.getInstance("X.509");
         final JcaPEMKeyConverter converter = new JcaPEMKeyConverter().setProvider(new BouncyCastleProvider());
@@ -93,7 +94,8 @@ public class PemUtils {
 
                 final X509CertificateHolder certHolder = (X509CertificateHolder) object;
 
-                final Collection<? extends Certificate> certs = factory.generateCertificates(new ByteArrayInputStream(certHolder.getEncoded()));
+                final Collection<? extends Certificate> certs = factory
+                	    .generateCertificates(new ByteArrayInputStream(certHolder.getEncoded()));
 
                 for (final Certificate cert : certs) {
                     if (chained) {
@@ -101,7 +103,7 @@ public class PemUtils {
                             chain.add(cert);
                         }
                     } else {
-                    	result.put(alias + "-" + counter++, new Entry(null, new Certificate[] { cert }));
+                        result.put(alias + "-" + counter++, new Entry(null, new Certificate[] { cert }));
                     }
                 }
             } else if (object instanceof PEMKeyPair) {
@@ -111,7 +113,8 @@ public class PemUtils {
             }
         }
 
-        final Certificate[] certificateChain = chain.isEmpty() ? null : chain.toArray(new X509Certificate[chain.size()]);
+        final Certificate[] certificateChain = chain.isEmpty() ? null 
+        	    : chain.toArray(new X509Certificate[chain.size()]);
 
         final Entry e = new Entry(key, certificateChain);
 
