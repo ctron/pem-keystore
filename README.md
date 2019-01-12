@@ -1,4 +1,4 @@
-# PKCS #1 PEM KeyStore for Java [![Maven Central](https://img.shields.io/maven-central/v/de.dentrassi.crypto/pem-keystore.svg "Maven Central Status")](http://search.maven.org/#search|gav|1|g%3A%22de.dentrassi.crypto%22%20AND%20a%3A%22pem-keystore%22)
+# PKCS #1 PEM KeyStore for Java [![Build status](https://api.travis-ci.org/ctron/pem-keystore.svg)](https://travis-ci.org/ctron/pem-keystore) [![Maven Central](https://img.shields.io/maven-central/v/de.dentrassi.crypto/pem-keystore.svg "Maven Central Status")](http://search.maven.org/#search|gav|1|g%3A%22de.dentrassi.crypto%22%20AND%20a%3A%22pem-keystore%22)
 
 
 Working with PKCS #1 PEM based certificates in Java is an itch. Here is the scratch.

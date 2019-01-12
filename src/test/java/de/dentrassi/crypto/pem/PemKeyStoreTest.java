@@ -27,6 +27,9 @@ public class PemKeyStoreTest {
 	}
 
 	protected void testWithProvider(final ThrowingCallable callable) throws Throwable {
+
+		// before running the test, there should be no "PEM" provider yet
+
 		assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
 
 		Security.addProvider(new PemKeyStoreProvider());
@@ -36,6 +39,8 @@ public class PemKeyStoreTest {
 		} finally {
 			Security.removeProvider("PEM");
 		}
+
+		// after running the test, there should again be no "PEM" provider any more
 
 		assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
 	}
