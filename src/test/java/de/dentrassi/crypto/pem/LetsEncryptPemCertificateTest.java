@@ -1,5 +1,8 @@
 package de.dentrassi.crypto.pem;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.FileInputStream;
 import java.security.Key;
 import java.security.KeyStore;
@@ -22,11 +25,11 @@ public class LetsEncryptPemCertificateTest {
 		java.security.cert.Certificate cert = ks.getCertificate("letsencrypt");
 		X509Certificate x509 = (X509Certificate) cert;
 		Key key = ks.getKey("letsencrypt", new char[0]);
-		Assert.assertEquals(x509.getSubjectAlternativeNames().size(), 2);
-		Assert.assertNotNull(key);
-		Assert.assertEquals(key.getClass(), BCRSAPrivateCrtKey.class);
+		assertEquals(x509.getSubjectAlternativeNames().size(), 2);
+		assertNotNull(key);
+		assertEquals(key.getClass(), BCRSAPrivateCrtKey.class);
 		Certificate[] chain = ks.getCertificateChain("letsencrypt");
-		Assert.assertNotNull(chain);
+		assertNotNull(chain);
 		Assert.assertEquals(2, chain.length);
 	}
 }
