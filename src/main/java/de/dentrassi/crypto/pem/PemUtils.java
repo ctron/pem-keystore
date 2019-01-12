@@ -44,7 +44,7 @@ public class PemUtils {
 
     private static final String SOURCE_PREFIX = "source.";
 
-	public static Map<String, Entry> loadFrom(final InputStream stream, final boolean chained) 
+    public static Map<String, Entry> loadFrom(final InputStream stream, final boolean chained) 
             throws CertificateException, IOException {
 
         final Map<String, Entry> result = new HashMap<>();
@@ -54,7 +54,7 @@ public class PemUtils {
         return Collections.unmodifiableMap(result);
 	}
 
-	public static Map<String, Entry> loadFromConfiguration(final InputStream stream) 
+    public static Map<String, Entry> loadFromConfiguration(final InputStream stream) 
             throws CertificateException, IOException {
 
         final Map<String, Entry> result = new HashMap<>();
@@ -76,7 +76,7 @@ public class PemUtils {
 
     }
 
-    private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained, 
+    private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained,
             final InputStream stream) throws CertificateException, IOException {
 
         final CertificateFactory factory = CertificateFactory.getInstance("X.509");
@@ -97,7 +97,7 @@ public class PemUtils {
                 final X509CertificateHolder certHolder = (X509CertificateHolder) object;
 
                 final Collection<? extends Certificate> certs = factory
-                	    .generateCertificates(new ByteArrayInputStream(certHolder.getEncoded()));
+                        .generateCertificates(new ByteArrayInputStream(certHolder.getEncoded()));
 
                 for (final Certificate cert : certs) {
                     if (chained) {
@@ -116,7 +116,7 @@ public class PemUtils {
         }
 
         final Certificate[] certificateChain = chain.isEmpty() ? null 
-        	    : chain.toArray(new X509Certificate[chain.size()]);
+                : chain.toArray(new X509Certificate[chain.size()]);
 
         final Entry e = new Entry(key, certificateChain);
 
