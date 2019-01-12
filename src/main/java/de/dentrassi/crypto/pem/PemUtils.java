@@ -44,7 +44,8 @@ public class PemUtils {
 
     private static final String SOURCE_PREFIX = "source.";
 
-	public static Map<String, Entry> loadFrom(final InputStream stream, final boolean chained) throws CertificateException, IOException {
+	public static Map<String, Entry> loadFrom(final InputStream stream, final boolean chained) 
+            throws CertificateException, IOException {
 
         final Map<String, Entry> result = new HashMap<>();
 
@@ -53,7 +54,8 @@ public class PemUtils {
         return Collections.unmodifiableMap(result);
 	}
 
-	public static Map<String, Entry> loadFromConfiguration(final InputStream stream) throws CertificateException, IOException {
+	public static Map<String, Entry> loadFromConfiguration(final InputStream stream) 
+            throws CertificateException, IOException {
 
         final Map<String, Entry> result = new HashMap<>();
 
@@ -75,7 +77,7 @@ public class PemUtils {
     }
 
     private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained, 
-    	    final InputStream stream) throws CertificateException, IOException {
+            final InputStream stream) throws CertificateException, IOException {
 
         final CertificateFactory factory = CertificateFactory.getInstance("X.509");
         final JcaPEMKeyConverter converter = new JcaPEMKeyConverter().setProvider(new BouncyCastleProvider());
