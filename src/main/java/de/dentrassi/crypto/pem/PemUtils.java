@@ -25,7 +25,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +50,7 @@ public class PemUtils {
 
         loadFrom(result, "pem", chained, stream);
 
-        return Collections.unmodifiableMap(result);
+        return result;
     }
 
     public static Map<String, Entry> loadFromConfiguration(final InputStream stream)
