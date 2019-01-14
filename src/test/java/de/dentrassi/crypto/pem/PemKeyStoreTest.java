@@ -22,54 +22,54 @@ import org.junit.jupiter.api.Test;
 
 public class PemKeyStoreTest {
 
-	@BeforeAll
-	public static void setup() {
-	}
+    @BeforeAll
+    public static void setup() {
+    }
 
-	protected void testWithProvider(final ThrowingCallable callable) throws Throwable {
+    protected void testWithProvider(final ThrowingCallable callable) throws Throwable {
 
-		// before running the test, there should be no "PEM" provider yet
+        // before running the test, there should be no "PEM" provider yet
 
-		assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
+        assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
 
-		Security.addProvider(new PemKeyStoreProvider());
+        Security.addProvider(new PemKeyStoreProvider());
 
-		try {
-			callable.call();
-		} finally {
-			Security.removeProvider("PEM");
-		}
+        try {
+            callable.call();
+        } finally {
+            Security.removeProvider("PEM");
+        }
 
-		// after running the test, there should again be no "PEM" provider any more
+        // after running the test, there should again be no "PEM" provider any more
 
-		assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
-	}
+        assertThatThrownBy(() -> KeyStore.getInstance("PEM")).isInstanceOf(KeyStoreException.class);
+    }
 
-	@Test
-	public void testGetInstance1() throws Throwable {
+    @Test
+    public void testGetInstance1() throws Throwable {
 
-		testWithProvider(() -> {
-			KeyStore.getInstance("PEM");
-		});
+        testWithProvider(() -> {
+            KeyStore.getInstance("PEM");
+        });
 
-	}
+    }
 
-	@Test
-	public void testGetInstance2() throws Throwable {
+    @Test
+    public void testGetInstance2() throws Throwable {
 
-		testWithProvider(() -> {
-			KeyStore.getInstance("PEM", "PEM");
-		});
+        testWithProvider(() -> {
+            KeyStore.getInstance("PEM", "PEM");
+        });
 
-	}
+    }
 
-	@Test
-	public void testGetInstance3() throws Throwable {
+    @Test
+    public void testGetInstance3() throws Throwable {
 
-		testWithProvider(() -> {
-			KeyStore.getInstance("PEM", new PemKeyStoreProvider());
-		});
+        testWithProvider(() -> {
+            KeyStore.getInstance("PEM", new PemKeyStoreProvider());
+        });
 
-	}
+    }
 
 }
