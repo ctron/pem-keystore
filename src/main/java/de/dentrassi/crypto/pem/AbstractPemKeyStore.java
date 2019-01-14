@@ -209,15 +209,18 @@ public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
             throws IOException, NoSuchAlgorithmException, CertificateException {
 
         if (stream != null) {
-        	this.entries = load(stream);
+            this.entries = load(stream);
         }
 
-        
     }
+
     @Override
- 	public void engineSetKeyEntry(final String alias, final Key key, final char[] password, final Certificate[] chain) throws KeyStoreException {
- 		Entry entry = new Entry(key, chain);
- 		this.entries.put(alias, entry);
- 	}
+    public void engineSetKeyEntry(final String alias, final Key key, final char[] password, final Certificate[] chain)
+            throws KeyStoreException {
+
+        final Entry entry = new Entry(key, chain);
+        this.entries.put(alias, entry);
+
+    }
 
 }
