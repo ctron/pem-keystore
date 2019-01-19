@@ -25,7 +25,6 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,17 +43,17 @@ public class PemUtils {
 
     private static final String SOURCE_PREFIX = "source.";
 
-    public static Map<String, Entry> loadFrom(final InputStream stream, final boolean chained) 
+    public static Map<String, Entry> loadFrom(final InputStream stream, final boolean chained)
             throws CertificateException, IOException {
 
         final Map<String, Entry> result = new HashMap<>();
 
         loadFrom(result, "pem", chained, stream);
 
-        return Collections.unmodifiableMap(result);
-	}
+        return result;
+    }
 
-    public static Map<String, Entry> loadFromConfiguration(final InputStream stream) 
+    public static Map<String, Entry> loadFromConfiguration(final InputStream stream)
             throws CertificateException, IOException {
 
         final Map<String, Entry> result = new HashMap<>();
@@ -108,14 +107,19 @@ public class PemUtils {
                         result.put(alias + "-" + counter++, new Entry(null, new Certificate[] { cert }));
                     }
                 }
+
             } else if (object instanceof PEMKeyPair) {
+
                 key = converter.getKeyPair((PEMKeyPair) object).getPrivate();
+
             } else if (object instanceof PrivateKeyInfo) {
+
                 key = converter.getPrivateKey((PrivateKeyInfo) object);
+
             }
         }
 
-        final Certificate[] certificateChain = chain.isEmpty() ? null 
+        final Certificate[] certificateChain = chain.isEmpty() ? null
                 : chain.toArray(new X509Certificate[chain.size()]);
 
         final Entry e = new Entry(key, certificateChain);
