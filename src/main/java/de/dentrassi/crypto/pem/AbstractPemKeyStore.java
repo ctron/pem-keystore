@@ -19,6 +19,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -93,7 +94,7 @@ public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
         }
     }
 
-    private Map<String, Entry> entries = new HashMap<>();
+    protected Map<String, Entry> entries = Collections.emptyMap();
 
     protected abstract Map<String, Entry> load(InputStream stream)
             throws IOException, NoSuchAlgorithmException, CertificateException;
@@ -214,13 +215,6 @@ public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
 
     }
 
-    @Override
-    public void engineSetKeyEntry(final String alias, final Key key, final char[] password, final Certificate[] chain)
-            throws KeyStoreException {
-
-        final Entry entry = new Entry(key, chain);
-        this.entries.put(alias, entry);
-
-    }
+    
 
 }

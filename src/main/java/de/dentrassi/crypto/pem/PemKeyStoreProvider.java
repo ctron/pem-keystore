@@ -39,5 +39,6 @@ public class PemKeyStoreProvider extends Provider {
         put("KeyStore.PEM", "de.dentrassi.crypto.pem.PemKeyStore");
         put("KeyStore.PEMCFG", "de.dentrassi.crypto.pem.PemConfigKeyStore");
         put("KeyStore.PEMCA", "de.dentrassi.crypto.pem.PemBundleKeyStore");
+        put("KeyStore.PEMMOD","eu.sergiomoreno.ModifiablePemConfigStore");
     }
 }
