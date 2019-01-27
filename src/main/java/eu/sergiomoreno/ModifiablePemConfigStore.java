@@ -23,7 +23,7 @@ public class ModifiablePemConfigStore extends PemConfigKeyStore{
 	
 	public ModifiablePemConfigStore() {
 		super();
-		super.entries = new HashMap<>();
+		this.entries = new HashMap<>();
 	}
 	
 	
@@ -32,7 +32,7 @@ public class ModifiablePemConfigStore extends PemConfigKeyStore{
             throws KeyStoreException {
 
         final Entry entry = new Entry(key, chain);
-        super.entries.put(alias, entry);
+        this.entries.put(alias, entry);
 
     }
 
