@@ -20,6 +20,13 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 
+/**
+ * An abstract implementation of {@link KeyStoreSpi}, implementing only mutating operations as "not supported". <br>
+ * This idea behind this implementation, is to provide a base class which implements all operations, which would change
+ * the state of the key store, throwing an "unsupported operation". This allows sub-classes of this implementation to
+ * focus on implementing the "get" style methods only.
+ *
+ */
 public abstract class AbstractReadOnlyKeyStore extends KeyStoreSpi {
 
     @Override
