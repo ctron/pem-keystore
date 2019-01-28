@@ -12,8 +12,8 @@
 package de.dentrassi.crypto.pem;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.FileInputStream;
 import java.security.Key;
@@ -22,7 +22,7 @@ import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
 
-import org.junit.Assert;
+
 import org.junit.jupiter.api.Test;
 
 public class LetsEncryptPemCertificateTest {
@@ -48,6 +48,6 @@ public class LetsEncryptPemCertificateTest {
 
         final Certificate[] chain = ks.getCertificateChain("letsencrypt");
         assertNotNull(chain);
-        Assert.assertEquals(2, chain.length);
+        assertEquals(2, chain.length);
     }
 }
