@@ -27,6 +27,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * An abstract base class, helping to implement key stores which are read-only and have some kind of a "load" method.
+ */
 public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
 
     public static final class Entry {

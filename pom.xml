@@ -119,14 +119,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <!-- required due to: https://bugs.eclipse.org/bugs/show_bug.cgi?id=538956 -->
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
 
     <build>
