@@ -20,7 +20,7 @@ public class PemKeyStore extends AbstractPemKeyStore {
 
     @Override
     protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
-        return PemUtils.loadFrom(stream, false);
+        return PemUtils.loadFrom(stream, true);
     }
 
 }
