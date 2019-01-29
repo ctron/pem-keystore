@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 Red Hat Inc and others.
+ * Copyright (c) 2018, 2019 Red Hat Inc and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,11 +16,27 @@ import java.io.InputStream;
 import java.security.cert.CertificateException;
 import java.util.Map;
 
-public class PemBundleKeyStore extends AbstractPemKeyStore {
+public final class PemBundleKeyStore {
 
-    @Override
-    protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
-        return PemUtils.loadFrom(stream, false);
+    private PemBundleKeyStore() {
+    }
+
+    public static final class Immutable extends AbstractReadOnlyKeyStore {
+
+        @Override
+        protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
+            return PemUtils.loadFrom(stream, false);
+        }
+
+    }
+
+    public static final class Mutable extends AbstractMutablePemKeyStore {
+
+        @Override
+        protected Map<String, Entry> load(final InputStream stream) throws CertificateException, IOException {
+            return PemUtils.loadFrom(stream, false);
+        }
+
     }
 
 }
