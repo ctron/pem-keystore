@@ -25,12 +25,12 @@ import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
@@ -50,7 +50,7 @@ public class PemUtils {
 
         loadFrom(result, "pem", chained, stream);
 
-        return Collections.unmodifiableMap(result);
+        return result;
     }
 
     public static Map<String, Entry> loadFromConfiguration(final InputStream stream)
@@ -111,6 +111,10 @@ public class PemUtils {
             } else if (object instanceof PEMKeyPair) {
 
                 key = converter.getKeyPair((PEMKeyPair) object).getPrivate();
+
+            } else if (object instanceof PrivateKeyInfo) {
+
+                key = converter.getPrivateKey((PrivateKeyInfo) object);
 
             }
         }

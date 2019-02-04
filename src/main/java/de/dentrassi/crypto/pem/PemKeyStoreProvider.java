@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 Red Hat Inc and others.
+ * Copyright (c) 2018, 2019 Red Hat Inc and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -36,8 +36,14 @@ public class PemKeyStoreProvider extends Provider {
     }
 
     private void performSetup() {
-        put("KeyStore.PEM", "de.dentrassi.crypto.pem.PemKeyStore");
-        put("KeyStore.PEMCFG", "de.dentrassi.crypto.pem.PemConfigKeyStore");
-        put("KeyStore.PEMCA", "de.dentrassi.crypto.pem.PemBundleKeyStore");
+        put("KeyStore.PEM", "de.dentrassi.crypto.pem.PemKeyStore$Immutable");
+        put("KeyStore.PEM.MOD", "de.dentrassi.crypto.pem.PemKeyStore$Mutable");
+
+        put("KeyStore.PEMCFG", "de.dentrassi.crypto.pem.PemConfigKeyStore$Immutable");
+        put("KeyStore.PEMCFG.MOD", "de.dentrassi.crypto.pem.PemConfigKeyStore$Mutable");
+
+        put("KeyStore.PEMCA", "de.dentrassi.crypto.pem.PemBundleKeyStore$Immutable");
+        put("KeyStore.PEMCA.MOD", "de.dentrassi.crypto.pem.PemBundleKeyStore$Mutable");
+
     }
 }

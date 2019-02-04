@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 Red Hat Inc and others.
+ * Copyright (c) 2018, 2019 Red Hat Inc and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,6 +14,7 @@ package de.dentrassi.crypto.pem;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.Key;
+import java.security.KeyStoreSpi;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
@@ -28,7 +29,7 @@ import java.util.Optional;
 /**
  * An abstract base class, helping to implement key stores which are read-only and have some kind of a "load" method.
  */
-public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
+public abstract class AbstractPemKeyStore extends KeyStoreSpi {
 
     public static final class Entry {
 
@@ -95,10 +96,12 @@ public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
         }
     }
 
-    private Map<String, Entry> entries = Collections.emptyMap();
+    protected Map<String, Entry> entries = Collections.emptyMap();
 
     protected abstract Map<String, Entry> load(InputStream stream)
             throws IOException, NoSuchAlgorithmException, CertificateException;
+
+    protected abstract Map<String, Entry> initializeEmpty();
 
     protected Optional<Entry> getEntry(final String alias) {
         return Optional.of(this.entries.get(alias));
@@ -210,11 +213,12 @@ public abstract class AbstractPemKeyStore extends AbstractReadOnlyKeyStore {
     public void engineLoad(final InputStream stream, final char[] password)
             throws IOException, NoSuchAlgorithmException, CertificateException {
 
-        if (stream == null) {
-            throw new IOException("KeyStore requires input stream");
+        if (stream != null) {
+            this.entries = load(stream);
+        } else {
+            this.entries = initializeEmpty();
         }
 
-        this.entries = load(stream);
     }
 
 }
