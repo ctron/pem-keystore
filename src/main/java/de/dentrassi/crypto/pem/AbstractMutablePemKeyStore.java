@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * Class that implements a few mutation methods in the keystore.<br/>
+ * Class that implements a few mutation methods in the keystore.<br>
  * It's abstract to allow to subclasses to choose how have to load its keys and certificates.
  * <p>
  * This is a mutable, but not peristable implementation, of a keystore. It is intended for use cases where an
