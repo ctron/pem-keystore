@@ -9,9 +9,9 @@ Include the project into your application (e.g. with Maven):
 
 ~~~xml
 <dependency>
-	<groupId>de.dentrassi.crypto</groupId>
-	<artifactId>pem-keystore</artifactId>
-	<version>2.1.0</version> <!-- check for most recent version -->
+  <groupId>de.dentrassi.crypto</groupId>
+  <artifactId>pem-keystore</artifactId>
+  <version>2.1.0</version> <!-- check for most recent version -->
 </dependency>
 ~~~
 
