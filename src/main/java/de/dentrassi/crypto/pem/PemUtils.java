@@ -12,7 +12,6 @@
 package de.dentrassi.crypto.pem;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,14 +29,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import de.dentrassi.crypto.pem.AbstractPemKeyStore.Entry;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
-
-import de.dentrassi.crypto.pem.AbstractPemKeyStore.Entry;
 
 public class PemUtils {
 
@@ -65,7 +63,7 @@ public class PemUtils {
 
         for (final String key : p.stringPropertyNames()) {
             if (key.startsWith(SOURCE_PREFIX)) {
-                try (FileInputStream source = new FileInputStream(new File(p.getProperty(key)))) {
+                try (InputStream source = openResource(p.getProperty(key))) {
                     loadFrom(result, alias, true, source);
                 }
             }
@@ -73,6 +71,14 @@ public class PemUtils {
 
         return result;
 
+    }
+
+    private static InputStream openResource(final String uri) throws IOException {
+        if (uri.startsWith("classpath:")) {
+            return Thread.currentThread().getContextClassLoader().getResourceAsStream(uri.substring(10));
+        } else {
+            return new FileInputStream(uri);
+        }
     }
 
     private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained,
