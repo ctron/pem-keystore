@@ -29,13 +29,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import de.dentrassi.crypto.pem.AbstractPemKeyStore.Entry;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.cert.X509CertificateHolder;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+
+import de.dentrassi.crypto.pem.AbstractPemKeyStore.Entry;
 
 public class PemUtils {
 
@@ -77,7 +78,7 @@ public class PemUtils {
         if (uri.startsWith("classpath:")) {
             return Thread.currentThread().getContextClassLoader().getResourceAsStream(uri.substring(10));
         } else {
-            return new FileInputStream(uri);
+            return new FileInputStream(uri.startsWith("file://") ? uri.substring(7) : uri);
         }
     }
 
