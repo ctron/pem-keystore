@@ -41,7 +41,7 @@
         <maven.version>3.3.9</maven.version>
         <java.source>1.8</java.source>
 
-        <bouncycastle.version>1.62</bouncycastle.version>
+        <bouncycastle.version>1.70</bouncycastle.version>
 
         <junit.jupiter.version>5.2.0</junit.jupiter.version>
         <junit.platform.version>1.2.0</junit.platform.version>
@@ -109,14 +109,14 @@
         <dependency>
             <groupId>io.undertow</groupId>
             <artifactId>undertow-core</artifactId>
-            <version>2.0.23.Final</version>
+            <version>2.1.8.Final</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>26.0-jre</version>
+            <version>31.1-jre</version>
             <scope>test</scope>
         </dependency>
 
