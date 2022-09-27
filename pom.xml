@@ -43,7 +43,7 @@
 
         <bouncycastle.version>1.70</bouncycastle.version>
 
-        <junit.jupiter.version>5.2.0</junit.jupiter.version>
+        <junit.jupiter.version>5.9.0</junit.jupiter.version>
         <junit.platform.version>1.2.0</junit.platform.version>
     </properties>
 
