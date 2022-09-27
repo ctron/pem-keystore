@@ -1,4 +1,4 @@
-# PKCS #1 PEM KeyStore for Java [![Build status](https://api.travis-ci.org/ctron/pem-keystore.svg)](https://travis-ci.org/ctron/pem-keystore) [![Maven Central](https://img.shields.io/maven-central/v/de.dentrassi.crypto/pem-keystore.svg "Maven Central Status")](http://search.maven.org/#search|gav|1|g%3A%22de.dentrassi.crypto%22%20AND%20a%3A%22pem-keystore%22)
+# PKCS #1 PEM KeyStore for Java [![CI](https://github.com/ctron/pem-keystore/actions/workflows/maven.yaml/badge.svg)](https://github.com/ctron/pem-keystore/actions/workflows/maven.yaml) [![Maven Central](https://img.shields.io/maven-central/v/de.dentrassi.crypto/pem-keystore.svg "Maven Central Status")](http://search.maven.org/#search|gav|1|g%3A%22de.dentrassi.crypto%22%20AND%20a%3A%22pem-keystore%22)
 
 
 Working with PKCS #1 PEM based certificates in Java is an itch. Here is the scratch.
@@ -11,14 +11,14 @@ Include the project into your application (e.g. with Maven):
 <dependency>
   <groupId>de.dentrassi.crypto</groupId>
   <artifactId>pem-keystore</artifactId>
-  <version>2.2.0</version> <!-- check for most recent version -->
+  <version>2.2.2</version> <!-- check for most recent version -->
 </dependency>
 ~~~
 
 ## The security Provider
 
-The projects acts as a Java security provider. Providing only a `KeyStore`
-implementation. However you need to make Java aware of the security provider.
+The project acts as a Java security provider. Providing only a `KeyStore`
+implementation. However, you need to make Java aware of the security provider.
 There are several ways to do this:
 
 ### Via direct invocation
@@ -98,7 +98,7 @@ Java keystores can either store one or more certificate chains. Java only uses t
 of the chain as a trusted certificate. So when you have a PKCS #1 PEM file, it is not clear
 if this is a chain of certificates, or a set of root certificates to trust.
 
-By default certificates get chained together when read. However the `PEMCA` Keystore will
+By default, certificates get chained together when read. However, the `PEMCA` Keystore will
 store certificates individually:
 
 ~~~java
