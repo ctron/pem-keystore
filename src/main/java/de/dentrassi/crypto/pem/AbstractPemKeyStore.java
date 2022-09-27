@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * An abstract base class, helping to implement key stores which are read-only and have some kind of a "load" method.
+ * An abstract base class, helping to implement key stores which are read-only and have some kind of "load" method.
  */
 public abstract class AbstractPemKeyStore extends KeyStoreSpi {
 
