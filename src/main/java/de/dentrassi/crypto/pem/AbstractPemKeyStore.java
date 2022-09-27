@@ -104,7 +104,7 @@ public abstract class AbstractPemKeyStore extends KeyStoreSpi {
     protected abstract Map<String, Entry> initializeEmpty();
 
     protected Optional<Entry> getEntry(final String alias) {
-        return Optional.of(this.entries.get(alias));
+        return Optional.ofNullable(this.entries.get(alias));
     }
 
     @Override
@@ -187,7 +187,7 @@ public abstract class AbstractPemKeyStore extends KeyStoreSpi {
 
         return getEntry(alias)
                 .map(Entry::isCertificate)
-                .orElse(null);
+                .orElse(false);
 
     }
 
