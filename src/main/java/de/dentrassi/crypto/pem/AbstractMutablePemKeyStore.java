@@ -1,4 +1,4 @@
-/*******************************************************************************
+/*
  * Copyright (c) 2019 Sergio Moreno and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,7 @@
  * Contributors:
  *    Sergio Moreno - Initial implementation
  *    Jens Reimann - minor cleanups
- *******************************************************************************/
+ */
 
 package de.dentrassi.crypto.pem;
 
