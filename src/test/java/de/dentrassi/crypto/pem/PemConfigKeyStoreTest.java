@@ -49,7 +49,7 @@ public class PemConfigKeyStoreTest {
         final Key key = ks.getKey("keycert", new char[0]);
 
         assertNotNull(chain);
-        assertEquals(2, chain.length);
+        assertEquals(3, chain.length);
 
         assertNotNull(cert);
         assertNotNull(key);

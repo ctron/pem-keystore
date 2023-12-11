@@ -48,6 +48,6 @@ public class LetsEncryptPemCertificateTest {
 
         final Certificate[] chain = ks.getCertificateChain("letsencrypt");
         assertNotNull(chain);
-        assertEquals(2, chain.length);
+        assertEquals(3, chain.length);
     }
 }
