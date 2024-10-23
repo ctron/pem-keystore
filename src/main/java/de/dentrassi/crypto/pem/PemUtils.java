@@ -11,30 +11,22 @@
 
 package de.dentrassi.crypto.pem;
 
-import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.security.KeyPair;
+import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
-import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
-import org.bouncycastle.cert.X509CertificateHolder;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMKeyPair;
-import org.bouncycastle.openssl.PEMParser;
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 
 import de.dentrassi.crypto.pem.AbstractPemKeyStore.Entry;
 
@@ -85,27 +77,18 @@ public class PemUtils {
     private static void loadFrom(final Map<String, Entry> result, final String alias, final boolean chained,
             final InputStream stream) throws CertificateException, IOException {
 
-        final CertificateFactory factory = CertificateFactory.getInstance("X.509");
-        final JcaPEMKeyConverter converter = new JcaPEMKeyConverter().setProvider(new BouncyCastleProvider());
-
-        @SuppressWarnings("resource")
-        final PEMParser reader = new PEMParser(new InputStreamReader(stream, StandardCharsets.UTF_8));
-
         final List<Certificate> chain = new ArrayList<>();
         Key key = null;
         int counter = 0;
 
         Object object;
-        while ((object = reader.readObject()) != null) {
+        try (PemReader pemReader = new PemReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+            while ((object = pemReader.readObject()) != null) {
 
-            if (object instanceof X509CertificateHolder) {
+                if (object instanceof Certificate) {
 
-                final X509CertificateHolder certHolder = (X509CertificateHolder) object;
+                    final Certificate cert = (Certificate)object;
 
-                final Collection<? extends Certificate> certs = factory
-                        .generateCertificates(new ByteArrayInputStream(certHolder.getEncoded()));
-
-                for (final Certificate cert : certs) {
                     if (chained) {
                         if (cert instanceof X509Certificate) {
                             chain.add(cert);
@@ -113,16 +96,16 @@ public class PemUtils {
                     } else {
                         result.put(alias + "-" + counter++, new Entry(null, new Certificate[] { cert }));
                     }
+
+                } else if (object instanceof KeyPair) {
+
+                    key = ((KeyPair)object).getPrivate();
+
+                } else if (object instanceof PrivateKey) {
+
+                    key = (PrivateKey)object;
+
                 }
-
-            } else if (object instanceof PEMKeyPair) {
-
-                key = converter.getKeyPair((PEMKeyPair) object).getPrivate();
-
-            } else if (object instanceof PrivateKeyInfo) {
-
-                key = converter.getPrivateKey((PrivateKeyInfo) object);
-
             }
         }
 
@@ -140,5 +123,4 @@ public class PemUtils {
         });
 
     }
-
 }
