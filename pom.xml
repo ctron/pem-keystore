@@ -41,7 +41,7 @@
         <maven.version>3.3.9</maven.version>
         <java.source>1.8</java.source>
 
-        <bouncycastle.version>1.78</bouncycastle.version>
+        <asn.one.version>0.6.0</asn.one.version>
 
         <junit.jupiter.version>5.9.0</junit.jupiter.version>
         <junit.platform.version>1.2.0</junit.platform.version>
@@ -68,14 +68,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk18on</artifactId>
-            <version>${bouncycastle.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk18on</artifactId>
-            <version>${bouncycastle.version}</version>
+            <groupId>com.hierynomus</groupId>
+            <artifactId>asn-one</artifactId>
+            <version>${asn.one.version}</version>
         </dependency>
 
         <!-- test -->
