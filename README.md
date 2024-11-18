@@ -11,7 +11,7 @@ Include the project into your application (e.g. with Maven):
 <dependency>
   <groupId>de.dentrassi.crypto</groupId>
   <artifactId>pem-keystore</artifactId>
-  <version>2.2.2</version> <!-- check for most recent version -->
+  <version>3.0.0</version> <!-- check for most recent version -->
 </dependency>
 ~~~
 
